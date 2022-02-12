@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  app1:
+    build: ./frontend
+    hostname: mongo
+    networks:
+      - frontend
+    ports:
+      - "3000:3000"
+  app2:
+    build: ./backend
+    networks:
+      - backend
+    ports:
+      - "8080:8080"
+  mongo:
+    image: mongo:latest
+    volumes:
+      - data:/data/mongo
+    networks:
+      - backend
+    expose:
+      - 27017
+    ports:
+      - "27017:27017"
+volumes: 
+  data: {}
+networks:
+  frontend:
+  backend:
+       
+ #app:1.0= frontend, app:2.0=backend
