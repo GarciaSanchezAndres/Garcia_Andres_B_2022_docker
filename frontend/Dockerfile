@@ -1,17 +1,17 @@
-# pull official base image
+#On pull l'image offcielle d'alpine
 FROM node:13.12.0-alpine
 
 # On configure le directory
 WORKDIR /app
 
-# install app dependencies
+# On installe les dépendances
 COPY package.json ./
 RUN npm install --silent
 
-# add app
+# On rajoute l'app
 COPY . ./
 
-# start app
+# On lance l'app
 CMD ["npm", "start"]
 
 #On expose le port 
