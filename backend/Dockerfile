@@ -1,13 +1,18 @@
-FROM node:8.11.1-alpine
+# pull official base image
+FROM node:13.12.0-alpine
 
-COPY package.json /app/package.json
-
-RUN cd /app && npm install
-
-COPY . /app/
-
-EXPOSE 80
-
+# On configure le directory
 WORKDIR /app
 
+# install app dependencies
+COPY package.json ./
+RUN npm install --silent
+
+# add app
+COPY . ./
+
+# start app
 CMD ["npm", "start"]
+
+#On expose le port 
+EXPOSE 8080
