@@ -1,30 +1,30 @@
-version: '3.7'
+version: '3.7' 
 services:
-  app1:
-    build: ./frontend
+  app1: #On définit les paramètres de notre frontend
+    build: ./frontend #On construit l'image du frontend
     hostname: mongo
     networks:
       - frontend
     ports:
-      - "3000:3000"
-  app2:
-    build: ./backend
+      - "3000:3000" #On ouvre le port 3000 pour le serveur web
+  app2: #On définit les paramètres de notre backend
+    build: ./backend #On construit l'image du backend
     networks:
       - backend
     ports:
-      - "8080:8080"
+      - "8080:8080" #On ouvre le port 8080 pour le serveur web
   mongo:
-    image: mongo:latest
+    image: mongo:latest #On installe la dernière image de mongo
     volumes:
-      - data:/data/mongo
+      - data:/data/mongo #Utilisation d'un volume pour enregistrer les informations de la db
     networks:
       - backend
     expose:
-      - 27017
+      - 27017 #On expose le port 27017
     ports:
-      - "27017:27017"
+      - "27017:27017" #On ouvre le port 27017 pour mongo
 volumes: 
-  data: {}
+  data: {} #Création d'un volume "data" pour la db
 networks:
   frontend:
   backend:
